@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct TaskListView: View {
+    
+  var sliderUpdatedValue: Double = 0
   @ObservedObject var taskManager = TaskManager.shared
   @State var showNotificationSettingsUI = false
+    
+  @State public var sliderValue: Double = 0
+  private let maxValue: Double = 100
 
   var body: some View {
     ZStack {
@@ -17,12 +22,9 @@ struct TaskListView: View {
         HStack {
             Image("SwiftUILogo")
                 .clipShape(Circle())
-                        .shadow(radius: 10)
-                        .overlay(Circle().stroke(Color.red, lineWidth: 5))
-          Spacer()
-          Text("Organizer Plus")
-            .font(.title)
-            .foregroundColor(.pink)
+          Text(UUID().uuidString)
+            .font(.title3)
+            .foregroundColor(.blue)
           Spacer()
           Button(
             action: {
@@ -37,18 +39,23 @@ struct TaskListView: View {
             label: {
               Image(systemName: "bell")
                 .font(.title)
-                .accentColor(.pink)
+                .accentColor(.blue)
             })
             .padding(.trailing)
             .sheet(isPresented: $showNotificationSettingsUI) {
               NotificationSettingsView()
             }
         }
+        Text("\(Int(self.sliderValue))%")
+          .foregroundColor(.orange)
+          .font(.title3)
+        Slider(value: $sliderValue,
+                           in: 0...maxValue)
         .padding()
         if taskManager.tasks.isEmpty {
           Spacer()
-          Text("No Tasks!")
-            .foregroundColor(.pink)
+          Text("Please add Task!")
+            .foregroundColor(.blue)
             .font(.title3)
           Spacer()
         } else {
@@ -71,7 +78,7 @@ struct ContentView_Previews: PreviewProvider {
 
 struct TaskCell: View {
   var task: Task
-
+  
   var body: some View {
     HStack {
       Button(
@@ -80,19 +87,22 @@ struct TaskCell: View {
           DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             TaskManager.shared.remove(task: task)
           }
-        }, label: {
+        }
+        , label: {
           Image(systemName: task.completed ? "checkmark.circle.fill" : "circle")
             .resizable()
             .frame(width: 20, height: 20)
-            .accentColor(.pink)
-        })
+            .accentColor(.blue)
+        }
+      )
       if task.completed {
         Text(task.name)
           .strikethrough()
-          .foregroundColor(.pink)
+          .foregroundColor(.blue)
+        
       } else {
         Text(task.name)
-          .foregroundColor(.pink)
+          .foregroundColor(.blue)
       }
     }
   }
@@ -117,7 +127,7 @@ struct AddTaskView: View {
               .foregroundColor(Color.white)
               .padding()
           })
-          .background(Color.pink)
+          .background(Color.blue)
           .cornerRadius(40)
           .padding()
           .sheet(isPresented: $showCreateTaskView) {
