@@ -16,9 +16,7 @@
 		09F005B92751F7FA00DE549D /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F005B82751F7FA00DE549D /* TaskManager.swift */; };
 		09F005BD2751F82B00DE549D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F005BC2751F82B00DE549D /* NotificationManager.swift */; };
 		09F005C02751F85400DE549D /* TaskPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F005BF2751F85400DE549D /* TaskPersistenceManager.swift */; };
-		09F005C42751F8D500DE549D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F005C32751F8D500DE549D /* LocationManager.swift */; };
 		09F005C72751F8FD00DE549D /* CreateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F005C62751F8FD00DE549D /* CreateTaskView.swift */; };
-		09F005CA2751F92E00DE549D /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F005C92751F92E00DE549D /* NotificationSettingsView.swift */; };
 		09F005CD2751F95600DE549D /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F005CC2751F95600DE549D /* Task.swift */; };
 		09F005D12752109800DE549D /* SliderValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F005D02752109800DE549D /* SliderValue.swift */; };
 /* End PBXBuildFile section */
@@ -35,9 +33,7 @@
 		09F005B82751F7FA00DE549D /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		09F005BC2751F82B00DE549D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		09F005BF2751F85400DE549D /* TaskPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPersistenceManager.swift; sourceTree = "<group>"; };
-		09F005C32751F8D500DE549D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		09F005C62751F8FD00DE549D /* CreateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskView.swift; sourceTree = "<group>"; };
-		09F005C92751F92E00DE549D /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
 		09F005CC2751F95600DE549D /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		09F005D02752109800DE549D /* SliderValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,7 +102,6 @@
 			children = (
 				09F005A02751F55200DE549D /* TaskListView.swift */,
 				09F005C62751F8FD00DE549D /* CreateTaskView.swift */,
-				09F005C92751F92E00DE549D /* NotificationSettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -117,7 +112,6 @@
 				09F005B82751F7FA00DE549D /* TaskManager.swift */,
 				09F005BC2751F82B00DE549D /* NotificationManager.swift */,
 				09F005BF2751F85400DE549D /* TaskPersistenceManager.swift */,
-				09F005C32751F8D500DE549D /* LocationManager.swift */,
 				09F005D02752109800DE549D /* SliderValue.swift */,
 			);
 			path = Managers;
@@ -197,11 +191,9 @@
 				09F005C72751F8FD00DE549D /* CreateTaskView.swift in Sources */,
 				09F0059D2751F55200DE549D /* AppDelegate.swift in Sources */,
 				09F0059F2751F55200DE549D /* SceneDelegate.swift in Sources */,
-				09F005C42751F8D500DE549D /* LocationManager.swift in Sources */,
 				09F005CD2751F95600DE549D /* Task.swift in Sources */,
 				09F005D12752109800DE549D /* SliderValue.swift in Sources */,
 				09F005BD2751F82B00DE549D /* NotificationManager.swift in Sources */,
-				09F005CA2751F92E00DE549D /* NotificationSettingsView.swift in Sources */,
 				09F005B92751F7FA00DE549D /* TaskManager.swift in Sources */,
 				09F005A12751F55200DE549D /* TaskListView.swift in Sources */,
 			);

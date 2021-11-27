@@ -14,8 +14,6 @@ enum NotificationManagerConstants {
     "TimeBasedNotificationThreadId"
   static let calendarBasedNotificationThreadId =
     "CalendarBasedNotificationThreadId"
-  static let locationBasedNotificationThreadId =
-    "LocationBasedNotificationThreadId"
 }
 
 class NotificationManager: ObservableObject {
@@ -78,20 +76,6 @@ class NotificationManager: ObservableObject {
       }
       content.threadIdentifier =
         NotificationManagerConstants.calendarBasedNotificationThreadId
-    case .location:
-      // 1
-      guard CLLocationManager().authorizationStatus == .authorizedWhenInUse else {
-        return
-      }
-      // 2
-      if let location = task.reminder.location {
-        // 3
-        let center = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-        let region = CLCircularRegion(center: center, radius: location.radius, identifier: task.id)
-        trigger = UNLocationNotificationTrigger(region: region, repeats: task.reminder.repeats)
-      }
-      content.threadIdentifier =
-      NotificationManagerConstants.locationBasedNotificationThreadId
     }
 
     // 4

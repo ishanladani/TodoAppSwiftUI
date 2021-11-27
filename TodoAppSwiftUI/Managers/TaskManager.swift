@@ -31,7 +31,9 @@ class TaskManager: ObservableObject {
 
   func loadTasks() {
     self.tasks = taskPersistenceManager.loadTasks()
-//    self.sliderValue.position = Double(tasks.count/100)
+    if tasks.count > 0 {
+        self.sliderValue.position = 100.0/Double(tasks.count)
+    }
   }
 
   func addNewTask(_ taskName: String, _ reminder: Reminder?) {
@@ -40,7 +42,6 @@ class TaskManager: ObservableObject {
     } else {
       save(task: Task(name: taskName, reminderEnabled: false, reminder: Reminder()))
     }
-//    sliderValue.position = Double(tasks.count/100)
   }
 
   func remove(task: Task) {
@@ -60,6 +61,7 @@ class TaskManager: ObservableObject {
       var updatedTask = task
       updatedTask.completed = true
       tasks[row] = updatedTask
+        self.sliderValue.position = 100.0/Double(tasks.count)
     }
   }
 }

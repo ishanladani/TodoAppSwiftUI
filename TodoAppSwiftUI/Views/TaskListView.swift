@@ -42,12 +42,9 @@ struct TaskListView: View {
                 .font(.title)
                 .accentColor(.blue)
             })
-            .padding(.trailing)
-            .sheet(isPresented: $showNotificationSettingsUI) {
-              NotificationSettingsView()
-            }
+            .padding(.trailing).alert(isPresented: $showNotificationSettingsUI, title: "Permission Granted", message: "Notification is already enable")
         }
-        Text("\(TaskManager.shared .sliderValue.position)%")
+        Text("\(Int(TaskManager.shared .sliderValue.position))%")
           .foregroundColor(.orange)
           .font(.title3)
         HandySlider(sliderValue: taskManager.sliderValue)
@@ -152,3 +149,18 @@ struct HandySlider: View {
     }
 }
 
+public extension View {
+    func alert(isPresented: Binding<Bool>,
+               title: String,
+               message: String? = nil,
+               dismissButton: Alert.Button? = nil) -> some View {
+
+        alert(isPresented: isPresented) {
+            Alert(title: Text(title),
+                  message: {
+                    if let message = message { return Text(message) }
+                    else { return nil } }(),
+                  dismissButton: dismissButton)
+        }
+    }
+}

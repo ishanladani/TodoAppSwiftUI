@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MapKit
 
 struct CreateTaskView: View {
   @State var taskName: String = ""
@@ -15,8 +14,6 @@ struct CreateTaskView: View {
   @State var timeDurationIndex: Int = 0
   @State private var dateTrigger = Date()
   @State private var shouldRepeat = false
-  @State private var latitude: String = ""
-  @State private var longitude: String = ""
   @State private var radius: String = ""
   @Environment(\.presentationMode) var presentationMode
 
@@ -53,8 +50,6 @@ struct CreateTaskView: View {
                 timeDurationIndex: $timeDurationIndex,
                 triggerDate: $dateTrigger,
                 shouldRepeat: $shouldRepeat,
-                latitude: $latitude,
-                longitude: $longitude,
                 radius: $radius)
                 .navigationBarHidden(true)
                 .navigationTitle("")
@@ -80,15 +75,6 @@ struct CreateTaskView: View {
       reminder.timeInterval = TimeInterval(timeDurations[timeDurationIndex] * 60)
     case .calendar:
       reminder.date = dateTrigger
-    case .location:
-      if let latitude = Double(latitude),
-        let longitude = Double(longitude),
-        let radius = Double(radius) {
-        reminder.location = LocationReminder(
-          latitude: latitude,
-          longitude: longitude,
-          radius: radius)
-      }
     }
     reminder.repeats = shouldRepeat
     return reminder
@@ -106,17 +92,13 @@ struct ReminderView: View {
   @Binding var timeDurationIndex: Int
   @Binding var triggerDate: Date
   @Binding var shouldRepeat: Bool
-  @Binding var latitude: String
-  @Binding var longitude: String
   @Binding var radius: String
-  @StateObject var locationManager = LocationManager()
 
   var body: some View {
     VStack {
       Picker("Notification Trigger", selection: $selectedTrigger) {
         Text("Time").tag(ReminderType.time)
         Text("Date").tag(ReminderType.calendar)
-        Text("Location").tag(ReminderType.location)
       }
       .pickerStyle(SegmentedPickerStyle())
       .padding(.vertical)
@@ -136,23 +118,6 @@ struct ReminderView: View {
         DatePicker("Please enter a date", selection: $triggerDate)
           .labelsHidden()
           .padding(.vertical)
-      } else {
-        VStack {
-          if !locationManager.authorized {
-            Button(
-              action: {
-                locationManager.requestAuthorization()
-              },
-              label: {
-                Text("Request Location Authorization")
-              })
-          } else {
-            TextField("Enter Latitude", text: $latitude)
-            TextField("Enter Longitude", text: $longitude)
-            TextField("Enter Radius", text: $radius)
-          }
-        }
-        .padding(.vertical)
       }
       Toggle(isOn: $shouldRepeat) {
         Text("Repeat Notification")
