@@ -10,6 +10,8 @@ import Foundation
 class TaskManager: ObservableObject {
   static let shared = TaskManager()
   let taskPersistenceManager = TaskPersistenceManager()
+    
+  @Published var sliderValue = SliderValue()
 
   @Published var tasks: [Task] = []
 
@@ -29,6 +31,7 @@ class TaskManager: ObservableObject {
 
   func loadTasks() {
     self.tasks = taskPersistenceManager.loadTasks()
+//    self.sliderValue.position = Double(tasks.count/100)
   }
 
   func addNewTask(_ taskName: String, _ reminder: Reminder?) {
@@ -37,6 +40,7 @@ class TaskManager: ObservableObject {
     } else {
       save(task: Task(name: taskName, reminderEnabled: false, reminder: Reminder()))
     }
+//    sliderValue.position = Double(tasks.count/100)
   }
 
   func remove(task: Task) {

@@ -10,5 +10,5 @@ import SwiftUI
 
 // make your observable double for the slider value:
 class SliderValue: ObservableObject {
-    @Published var position: Double = 11.0
+    @Published var position: Double = 0.0
 }

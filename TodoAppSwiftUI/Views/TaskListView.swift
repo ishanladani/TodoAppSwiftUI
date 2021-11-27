@@ -9,20 +9,21 @@ import SwiftUI
 
 struct TaskListView: View {
     
-  var sliderUpdatedValue: Double = 0
+  let deviceID = UUID().uuidString
   @ObservedObject var taskManager = TaskManager.shared
   @State var showNotificationSettingsUI = false
     
-  @State public var sliderValue: Double = 0
+
   private let maxValue: Double = 100
 
   var body: some View {
     ZStack {
       VStack {
         HStack {
-            Image("SwiftUILogo")
+         Spacer(minLength: 10)
+         Image("SwiftUILogo")
                 .clipShape(Circle())
-          Text(UUID().uuidString)
+          Text(deviceID)
             .font(.title3)
             .foregroundColor(.blue)
           Spacer()
@@ -46,15 +47,14 @@ struct TaskListView: View {
               NotificationSettingsView()
             }
         }
-        Text("\(Int(self.sliderValue))%")
+        Text("\(TaskManager.shared .sliderValue.position)%")
           .foregroundColor(.orange)
           .font(.title3)
-        Slider(value: $sliderValue,
-                           in: 0...maxValue)
+        HandySlider(sliderValue: taskManager.sliderValue)
         .padding()
         if taskManager.tasks.isEmpty {
           Spacer()
-          Text("Please add Task!")
+          Text("Please add Todo!")
             .foregroundColor(.blue)
             .font(.title3)
           Spacer()
@@ -86,6 +86,7 @@ struct TaskCell: View {
           TaskManager.shared.markTaskComplete(task: task)
           DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             TaskManager.shared.remove(task: task)
+            
           }
         }
         , label: {
@@ -99,7 +100,7 @@ struct TaskCell: View {
         Text(task.name)
           .strikethrough()
           .foregroundColor(.blue)
-        
+//        TaskManager.shared .sliderValue.position = t
       } else {
         Text(task.name)
           .foregroundColor(.blue)
@@ -138,3 +139,16 @@ struct AddTaskView: View {
     }
   }
 }
+
+
+struct HandySlider: View {
+    @ObservedObject var sliderValue: SliderValue
+    var body: some View {
+        HStack {
+            Text("0")
+            Slider(value: $sliderValue.position, in: 0...100)
+            Text("100")
+        }
+    }
+}
+
